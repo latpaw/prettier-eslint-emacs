@@ -74,11 +74,10 @@ Use --bracket-spacing=false option for prettier")
   "Format the current file with ESLint."
   (interactive)
   (let ((options (prettier-eslint/options)))
-        (progn (call-process
+        (progn (apply 'call-process
                 (prettier-eslint/binary)
                 nil "*Prettier-ESLint Errors*" nil
-                buffer-file-name "--write" "--single-quote"
-                "--trailing-comma" "--bracket-spacing=false")
+                buffer-file-name "--write" options)
                (revert-buffer t t t))))
 
 
